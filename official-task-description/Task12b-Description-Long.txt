@@ -1,0 +1,163 @@
+From: https://participants-area.bioasq.org/general_information/Task13b/
+
+BioASQ Participants Area
+* Task 13b will begin in 2025! *
+
+What's new in BioASQ13-Task b
+
+    Since BioASQ12, an additional phase (Phase A+) of submitting answers (exact and/or ideal), before the golden documents and snippets become available is provided. i.e. Answers based on documents identified by participant systems.
+    Since BioASQ9, the official scores for snippets in Phase A will be based on mean F-measure. For more details please see relevant FAQ.
+    Since BioASQ8, for the evaluation of Phase A we will use MAP considering the limit of 10 elements per question, as explained here. For more details please see relevant FAQ.
+    As in BioASQ7, the answers regarding the yes/no questions will be evaluated using the F1 metric for Phase B.
+    For more details see relevant FAQ, evaluation measures for task B here and "JSON format of the datasets" section below.
+
+Other notes-Task B
+
+    Since BioASQ 5 no synonyms should be submitted by participants for exact answers of factoid and list questions any more.
+    We focus only on the title and the abstracts of the documents and we do not use PubMedCentral articles (PMC) any more.
+    Concerning Phase A the participating systems are required to return at most 10 relevant documents and snippets.
+    Concerning Phase B the systems will be provided only with the gold documents and snippets for each question.
+
+We strongly encourage you to go through the guidelines and pay attention to the changes as well as in the format of the answers you will submit.
+Task 13B Guidelines
+For a comprehensive description of the BioASQ tasks please visit bioasq.org.
+
+Task 13B will use benchmark datasets containing development and test questions, in English, along with gold standard (reference) answers. The benchmark datasets are being constructed by a team of biomedical experts from around Europe. Consult BioASQ Deliverable 3.7 for more information on the construction of the benchmark datasets.
+
+    Phase A: BioASQ will release questions from the benchmark datasets. The participating systems will have to respond with relevant relevant articles (in English, from designated article repositories) and relevant snippets (from the relevant articles).
+    Phase B: BioASQ will release questions and gold (correct) relevant articles and snippets from the benchmark datasets. The participating systems will have to respond with exact answers (e.g., named entities in the case of factoid questions) and ideal answers (paragraph-sized summaries), both in English.
+
+Systems may participate in any of the two or, ideally, both phases.
+The rest of the guidelines is organized in sections. You can expand a section by clicking on it.
++ Types of questions
+The benchmark datasets contain four types of questions:
+
+    Yes/no questions: These are questions that, strictly speaking, require "yes" or "no" answers, though of course in practice longer answers will often be desirable. For example, "Do CpG islands colocalise with transcription start sites?" is a yes/no question.
+    Factoid questions: These are questions that, strictly speaking, require a particular entity name (e.g., of a disease, drug, or gene), a number, or a similar short expression as an answer, though again a longer answer may be desirable in practice. For example, "Which virus is best known as the cause of infectious mononucleosis?" is a factoid question.
+    List questions: These are questions that, strictly speaking, require a list of entity names (e.g., a list of gene names), numbers, or similar short expressions as an answer; again, in practice additional information may be desirable. For example, "Which are the Raf kinase inhibitors?" is a list question.
+    Summary questions: These are questions that do not belong in any of the previous categories and can only be answered by producing a short text summarizing the most prominent relevant information. For example, "What is the treatment of infectious mononucleosis?" is a summary question.
+
++ Required Answers in Phase A
+In Phase A of Task 13b, the participants will be provided with English questions q1, q2,...,qn. For each question qi, each participating system will be required to return any (ideally all) of the following lists:
+
+    A list of at most 10 relevant articles (documents) di,1, di,2, di,3,... from the designated article repositories. Again, the list should be ordered by decreasing confidence, i.e., di,1, should be the article that the system considers to be the most relevant to the question q1,, di,2, should be the article that the system considers to be the second most relevant etc. A single article list will be returned per question and participating system, and the list may contain articles from multiple designated repositories. The returned article list will actually contain unique article identifiers (obtained from the repositories).
+    A list of at most 10 relevant text snippets si,1, si,2, si,3,... from the returned articles. Again, the list should be ordered by decreasing confidence. A single snippet list will be returned per question and participating system, and the list may contain any number (or no) snippets from any of the returned articles di,1, di,2, di,3,... Each snippet will be represented by the unique identifier of the article it comes from, the identifier of the section the snippet starts in, the offset of the first character of the snippet in the section the snippet starts in, the identifier of the section the snippet ends in, and the offset of the last character of the snippet in the section the snippet ends in. The snippets themselves will also have to be returned (as strings).
+
++ Required Answers in Phase A+
+In Phase A+ of Task 13b, the participants will be provided with English questions as in Phase A (above), but will be required to return "exact" and/or "ideal" answers, as in for Phase B (below).
++ Required Answers in Phase B
+In Phase B, the participants will be provided with the same questions q1, q2,...,qn as in Phase A, but this time they will also be given gold (correct) lists of articles and snippets. The "gold" lists will contain articles and snippets identified by biomedical experts as relevant and providing enough information to answer the questions. For each question, each participating system may return an ideal answer, i.e., a paragraph-sized summary of relevant information. In the case of yes/no, factoid, and list questions, the systems may also return exact answers; for summary questions, no exact answers will be returned. The participants will be told the type of each question. A participating system may return only "exact" answers, or only "ideal" answers, or (ideally) both "exact" and "ideal" answers.
+Exact Answers
+
+    For each yes/no question, the exact answer of each participating system will have to be either "yes" or "no".
+    For each factoid question, each participating system will have to return a list* of up to 5 entity names (e.g., up to 5 names of drugs), numbers, or similar short expressions, ordered by decreasing confidence.
+    For each list question, each participating system will have to return a single list* of entity names, numbers, or similar short expressions, jointly taken to constitute a single answer (e.g., the most common symptoms of a disease). The returned list will have to contain no more than 100 entries of no more than 100 characters each.
+    No exact answers will be returned for summary questions.
+
+* Please consult section JSON format of the datasets for specific details regarding the needed submission format.
+Ideal Answers
+For each question (yes/no, factoid, list, summary), each participating system of Phase B may also return an ideal answer, i.e., a single paragraph-sized text ideally summarizing the most relevant information from articles and snippets retrieved in Phase A. Each returned "ideal" answer is intended to approximate a short text that a biomedical expert would write to answer the corresponding question (e.g., including prominent supportive information), whereas the "exact" answers are only "yes"/"no" responses, entity names or similar short expressions, or lists of entity names and similar short expressions; and there are no "exact" answers in the case of summary questions. The maximum allowed length of each "ideal" answer is 200 words.
+
+Attention:
+
+    In the exceptional case that strings submitted as ideal answers are not actual answers to the given question (e.g. submitting an empty string or a default message like “no answer”) this answer takes manual score zero for all four properties considered.
+    Since BioASQ5, no synonyms should be submitted by participants for exact answers of factoid and list questions. This change does not affect the submissions format (see JSON example below).
+    The gold lists that will be provided to the participants of Phase B will contain the relevant articles and snippets that the biomedical experts who prepared the questions managed to identify.
+    There will be enough information in the provided gold lists (all two lists together, e.g., not necessarily in any single list) to find the "exact" answer and to formulate an "ideal" answer. However, there may be (and most probably, will be) additional correct (relevant) articles and snippets, which will not be included in the provided gold lists.
+    When producing the "exact" and "ideal" answers in Phase B, the participating systems are allowed to use both the provided gold lists and any other resource (e.g., the articles and snippets, they retrieved in Phase A, in addition to the gold provided lists).
+    Before announcing the official results of Phase B, biomedical experts will examine the lists of articles and snippets returned by the participating systems, as well as the "exact" and "ideal" answers of the participating systems, in order to enhance the gold lists of articles, snippets and the gold "exact" and "ideal" answers that will be used as references for evaluation purposes, as discussed here .
+
++ Download Training Dataset
+A development ("dry-run") dataset for Phases A and B of Task 13b can be downloaded from here . The development dataset consists of 5389 questions, along with their gold articles, snippets, "exact" answers, and "ideal" answers in JSON format, explained below.
+Attention:
+
+    Only registered users can download the development dataset.
+    The participants are allowed to use any resources they wish to train their systems.
+
++ Test dataset and evaluation process
+The test dataset will be released in four batches. For each batch, first only the questions of the batch will be released, and the participants will have to submit their answers for Phase A (articles, snippets) within 24 hours; then the gold articles and snippets for the questions of the batch will also be provided, and the participants will again have 24 hours to submit their answers for Phase B ("exact" and "ideal" answers). The batches will be released according to the following schedule:
+
+    Wednesday March 26, 2025, 10:00 GMT: Questions of batch 1 released. Phase A answers (articles, snippets) and Phase A+ answers (“exact” and “ideal”) of batch 1 due within 24 hours.
+    Thursday March 27, 2025, 11:00 GMT: Gold articles and snippets of batch 1 released. Phase B answers (“exact” and “ideal”) of batch 1 due within 24 hours.
+    Wednesday April 09, 2025, 10:00 GMT: Questions of batch 2 released. Phase A answers (articles, snippets) and Phase A+ answers (“exact” and “ideal”) of batch 2 due within 24 hours.
+    Thursday April 10, 2025, 11:00 GMT: Gold articles and snippets of batch 2 released. Phase B answers of batch 2 due within 24 hours.
+    Wednesday April 23, 2025, 10:00 GMT: Questions of batch 3 released. Phase A answers (articles, snippets) and Phase A+ answers (“exact” and “ideal”) of batch 3 due within 24 hours.
+    Thursday April 24, 2025, 11:00 GMT: Gold articles and snippets batch 3 released. Phase B answers of batch 3 due within 24 hours.
+    Wednesday May 07, 2025, 10:00 GMT: Questions of batch 4 released. Phase A answers (articles, snippets) and Phase A+ answers (“exact” and “ideal”) of batch 4 due within 24 hours.
+    Thursday May 08, 2025, 11:00 GMT: Gold articles and snippets of batch 4 released. Phase B answers of batch 4 due within 24 hours.
+
+The evaluation measures that will be used in Phase A and Phase B are presented here .
++ Designated resources for Phase A
+In Phase A, relevant articles are to be retrieved from PubMed Annual Baseline Repository for 2025. Their unique identifiers are their URLs in PubMed (e.g., "http://www.ncbi.nlm.nih.gov/pubmed/23687640").
+
+The relevant snippets will have to be parts of relevant articles.
+
+Instructions on how to download the designated resources and/or how to use tools that the organizers provide to search the designated resources are available here.
++ JSON format of the datasets
+The development and test datasets use the following JSON format:
+
+{"questions":[
+	{
+		"type":"factoid",
+		"body":"Is Rheumatoid Arthritis more common in men or women?",
+		"id":"5118dd1305c10fae750000010",
+		"ideal_answer": "Disease patterns in RA vary between the sexes; the condition is
+			more commonly seen in women, who exhibit a more aggressive disease and a poorer
+			long-term outcome.",
+		"exact_answer": [
+			["Women"]
+		],
+		"documents": [
+			"http://www.ncbi.nlm.nih.gov/pubmed/12723987"
+			, ...
+		],
+		"snippets":[
+			{
+				"document": "http://www.ncbi.nlm.nih.gov/pubmed/22853635",
+				"text": "The expression and clinical course of RA are influenced by gender.
+					In developed countries the prevalence of RA is 0,5 to 1.0%, with a
+					male:female ratio of 1:3.",
+				"offsetInBeginSection": 559,
+				"offsetInEndSection": 718,
+				"beginSection": "sections.0"
+				"endSection": "sections.0"
+			}, ...
+		],
+
+	}, ...
+]}
+
+In the case of factoid questions, the "exact_answer" field is a list of lists. Each of the inner list (up to 5 inner lists are allowed) should contain the name of the entity (or number, or other similar short expression) sought by the question; Since BioASQ5, no multiple names (synonyms) should be submitted for any entity, therefore each inner list should only contain one element. If the List contains more than one elements, only the first element will be taken into account for evaluation. Note that in the training data the field is a *simple* list containing the entity (and its synonyms if they were identified) that answers the question.
+
+In the case of list questions, the "exact_answer" field is a list of lists. Each element of the outmost list is a list corresponding to one of the entities (or numbers, or other similar short expressions) seeked by the question. Since BioASQ5, no multiple names (synonyms) should be submitted for any entity, therefore each inner list should only contain one element. If the List contains more than one elements, only the first element will be taken into account for evaluation.
+If any of the seeked entities has multiple names (synonyms), the corresponding inner list should only contain *one* of them. In the following example the exact golden answer to the list question contains three entities and the second entity has two names, i.e, "influenza" and "grippe":
+
+"exact_answer": [["pneumonia"], ["influenza", "grippe"], ["bronchitis"]]
+
+However, the submitted answer by the participants should be one of the following:
+
+"exact_answer": [["pneumonia"], ["influenza"], ["bronchitis"]]
+
+or "exact_answer": [["pneumonia"], ["grippe"], ["bronchitis"]]
+
+Since, golden answer contains both synonyms, both answers are equivalent for evaluation.
+
+Also note that "ideal_answer" in training data is a list, so that all golden ideal answers are available for training, if many. However, each system is expected to submit only one ideal answer per question as a string, as described in JSON format above.
+
+Full text documents returned from PubMedCentral [Deprecated] As from BioASQ 3 only the abstracts and the titles of the articles are used. Thus, downloading the fulltext articles separately is not necessary. The required information concerning the articles can be obtained by the webservices provided by the BioASQ team. In those abstract-only documents that are returned from PubMed, where only the abstract and titles are available, the "beginSection" and "endSection" are both "abstract" (if the snippet comes from the abstract) or they are both "title" (if the snippet comes from the title). A snippet may not come from both the title and the abstract.
+
+When submitting results, participants will use the same JSON format. The "text" field in the elements of the snippet list is also required.
++ Systems
+Each participant (e.g., organization, research group) will be allowed to participate in Task b with a maximum of 5 systems. To declare the systems you are participating with, log in, go to "Edit Profile", and then click on the "Add System" button. The system name you will fill in the form will be the identifier of your system and it will be used in the "Results" section.
+Attention: Trying to upload results without selecting a system will cause an error and the results will not be saved.
++ Continuous Space Word Vectors
+The word2vec tool (https://code.google.com/p/word2vec/) processes a large text corpus and maps the words of the corpus to vectors of a continuous space. The word vectors can then be used, for example, to estimate the relatedness of two words or to perform query expansion. We applied word2vec to a corpus of 10,876,004 English abstracts of biomedical articles from PubMed. The resulting vectors of 1,701,632 distinct words (types) are now publicly available here. File size: 1.3GB (compressed), 3.5GB (uncompressed). More information here.
+
+*Data from NLM are distributed based on the conditions described here. License Code: 8283NLM123.
+If you used data obtained from the BioASQ challenges please support us by reporting BioASQ in your acknowledgements and citing our papers:
+
+An overview of the BIOASQ large-scale biomedical semantic indexing and question answering competition: George Tsatsaronis, Georgios Balikas, Prodromos Malakasiotis, Ioannis Partalas, Matthias Zschunke, Michael R Alvers, Dirk Weissenborn, Anastasia Krithara, Sergios Petridis, Dimitris Polychronopoulos, Yannis Almirantis, John Pavlopoulos, Nicolas Baskiotis, Patrick Gallinari, Thierry Artiéres, Axel Ngonga, Norman Heino, Eric Gaussier, Liliana Barrio-Alvers, Michael Schroeder, Ion Androutsopoulos and Georgios Paliouras, in BMC bioinformatics, 2015 (bib).
+
+BioASQ-QA: A manually curated corpus for Biomedical Question Answering: Anastasia Krithara, Anastasios Nentidis, Konstantinos Bougiatiotis and Georgios Paliouras in Sci Data 10, 2023 (bib).
+
+The road from manual to automatic semantic indexing of biomedical literature: a 10 years journey: Anastasia Krithara, James G. MorkAnastasios Nentidis, and Georgios Paliouras in Frontiers in Research Metrics and Analytics, vol. 8, 2023 (bib). 

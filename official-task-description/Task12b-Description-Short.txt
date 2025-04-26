@@ -1,0 +1,7 @@
+From: https://bioasq.org/participate/challenges
+
+BioASQ Task 13b: Biomedical Semantic QA (involves IR, QA, summarization)
+
+Task 13b will use benchmark datasets containing training and test biomedical questions, in English, along with gold standard (reference) answers. The participants will have to respond to each test question with relevant articles (in English, from designated article repositories), relevant snippets (from the relevant articles), exact answers (e.g., named entities in the case of factoid questions) and 'ideal' answers (English paragraph-sized summaries). More than 5,000 training questions (that were used as dry-run or test questions in previous year) are already available, along with their gold standard answers (relevant  articles, snippets, exact answers, summaries). About 300 new test questions will be used this year. All the questions are constructed by biomedical experts from around Europe. 
+
+The test dataset of Task 13b will be released in batches, each containing approximately 100 questions. The task will start on March, 2025. Separate winners will be announced for each batch. Participation in the task can be partial; for example, it is acceptable to participate in only some of the batches, to return only relevant articles (and no article snippets), or to return only exact answers (or only `ideal' answers). System responses will be evaluated both automatically and manually. Read more...
