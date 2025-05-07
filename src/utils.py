@@ -52,6 +52,45 @@ def load_bioasq_questions(file_path, num_questions=None):
         print(f"Error: Missing expected key in JSON structure: {e}")
         return []
 
+def load_bioasq_test_questions(file_path):
+    """
+    Load and process BioASQ test dataset questions.
+
+    Args:
+        file_path (str): Path to the BioASQ test JSON file
+
+    Returns:
+        list: List of processed question dictionaries
+    """
+    try:
+        # Load the full dataset
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        # Extract questions (test data has a simpler structure)
+        processed_questions = [
+            {
+                'body': question['body'],
+                'type': question['type'],
+                'id': question['id'],
+            }
+            for question in data['questions']
+        ]
+
+        return processed_questions
+
+    except FileNotFoundError:
+        print(f"Error: File not found at {file_path}")
+        return []
+    except JSONDecodeError:
+        print(f"Error: Invalid JSON format in {file_path}")
+        return []
+    except KeyError as e:
+        print(f"Error: Missing expected key in JSON structure: {e}")
+        return []
+    except UnicodeDecodeError as e:
+        print(f"Error: Unicode decoding error: {e}. Try different encoding.")
+        return []
 
 def get_session():
     """
