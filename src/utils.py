@@ -7,8 +7,13 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
+# Importation for word2vec
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+from gensim.models import KeyedVectors
 
-def load_bioasq_questions(file_path, num_questions=None):
+
+def load_bioasq_questions(file_path, num_questions=None, test=True):
     """
     Load and process BioASQ dataset questions.
 
@@ -25,16 +30,27 @@ def load_bioasq_questions(file_path, num_questions=None):
             data = json.load(f)
 
         # Extract relevant fields from each question
-        processed_questions = [
-            {
-                'body': question['body'],
-                'type': question['type'],
-                'id': question['id'],
-                'target_documents': question['documents'],
-            }
-            for question in data['questions']
-            if question['type'] in ['yesno', 'factoid', 'summary', 'list']
-        ]
+        if test:
+            processed_questions = [
+                {
+                    'body': question['body'],
+                    'type': question['type'],
+                    'id': question['id'],
+                    'target_documents': question['documents'],
+                }
+                for question in data['questions']
+                if question['type'] in ['yesno', 'factoid', 'summary', 'list']
+            ]
+        else:
+            processed_questions = [
+                {
+                    'body': question['body'],
+                    'type': question['type'],
+                    'id': question['id']
+                }
+                for question in data['questions']
+                if question['type'] in ['yesno', 'factoid', 'summary', 'list']
+            ]
 
         # Return requested number of questions or all if num_questions is None
         if num_questions is not None:
@@ -132,3 +148,63 @@ def extract_keywords(text):
 
     # Return keywords as a list of strings
     return keywords
+
+
+def load_vectors_gensim(types_path, vectors_path, vector_size=200):
+    word_vectors = KeyedVectors(vector_size=vector_size)
+    words = []
+    vectors = []
+
+    with open(types_path, 'r', encoding='utf-8') as f_types, open(vectors_path, 'r', encoding='utf-8') as f_vecs:
+        for word_line, vec_line in zip(f_types, f_vecs):
+            word = word_line.strip()
+            vector = np.array([float(num) for num in vec_line.strip().split()], dtype=np.float32)
+            words.append(word)
+            vectors.append(vector)
+
+    word_vectors.add_vectors(words, vectors)
+    return word_vectors
+
+
+def get_similar_words(word, model, top_k=3):
+    if word in model:
+        return [w for w, _ in model.most_similar(word, topn=top_k)]
+    else:
+        return []
+
+
+def expand_question_with_w2v(question, model):
+    tokens = extract_keywords(question)
+    expansion = {}
+    for token in tokens:
+        similar = get_similar_words(token, model)
+        if similar:
+            expansion[token] = similar
+        else:
+            expansion[token] = [] 
+    return expansion
+
+
+def build_boolean_query(expansion_dict):
+    query_parts = []
+    for keyword, similars in expansion_dict.items():
+        terms = [keyword] + similars
+        group = " OR ".join(terms)
+        query_parts.append(f"({group})")
+    return " AND ".join(query_parts)
+
+
+def save_results_to_json(ranked_questions, filename = '../output/output_questions.json'):
+    """
+    Save the results to a JSON file.
+    """
+
+    output_data = {
+        "questions": ranked_questions
+    }
+
+    with open(filename, 'w') as json_file:
+        json.dump(output_data, json_file, indent=4)
+
+
+    return f"Results saved to {filename}"
