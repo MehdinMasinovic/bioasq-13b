@@ -44,15 +44,13 @@ def get_mesh_terms(pmid):
         print(f"Error fetching PMID {pmid}: {e}", file=sys.stderr)
         return set()
 
-i=0
 def mesh_terms_for_pmid_list(pmid_list, delay=0.3):
     all_mesh = set()
     for pmid in pmid_list:
         mesh_terms = get_mesh_terms(pmid)
         all_mesh.update(mesh_terms)
         time.sleep(delay)  # To avoid overloading the NCBI servers
-    print(f"Processed query {i}: {len(all_mesh)} MeSH terms")
-    i+=1
+    print(f"Processed query: {len(all_mesh)} MeSH terms")
     return all_mesh
 
 def write_mesh_file(question_to_pmids, output_file):
@@ -65,15 +63,19 @@ def write_mesh_file(question_to_pmids, output_file):
 # Run the script
 if __name__ == "__main__":
     result_file = "src/BioASQ-task13b-phaseA-testset4-neural-results.json"
-    golden_file = "data/BioASQ-training13b/training13b.json"
+    golden_file = "data/BioASQ-task13bPhaseB-testset4"
 
     result_pmids = load_documents_json(result_file)
     golden_pmids = load_documents_json(golden_file)
 
+    print(f"Number of questions in result file: {len(result_pmids)}")
+    print(f"Number of questions in golden file: {len(golden_pmids)}")
+    print(f"Number of shared questions: {len(result_pmids.keys() & golden_pmids.keys())}")
+
     shared_question_ids = result_pmids.keys() & golden_pmids.keys()
 
-    # result_meshes = {q: mesh_terms_for_pmid_list(result_pmids[q]) for q in shared_question_ids}
-    # golden_meshes = {q: mesh_terms_for_pmid_list(golden_pmids[q]) for q in shared_question_ids}
+    result_meshes = {q: mesh_terms_for_pmid_list(result_pmids[q]) for q in shared_question_ids}
+    golden_meshes = {q: mesh_terms_for_pmid_list(golden_pmids[q]) for q in shared_question_ids}
 
-    # write_mesh_file(result_meshes, "system_A_results.txt")
-    # write_mesh_file(golden_meshes, "true_labels.txt")
+    write_mesh_file(result_meshes, "system_A_results.txt")
+    write_mesh_file(golden_meshes, "true_labels.txt")
