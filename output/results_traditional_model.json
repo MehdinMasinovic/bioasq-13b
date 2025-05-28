@@ -1,0 +1,85 @@
+{
+    "questions": [
+        {
+            "id": "55031181e9bde69634000014",
+            "type": "summary",
+            "body": "Is Hirschsprung disease a mendelian or a multifactorial disorder?",
+            "documents": [
+                "http://www.ncbi.nlm.nih.gov/pubmed/11106284",
+                "http://www.ncbi.nlm.nih.gov/pubmed/20027720",
+                "http://www.ncbi.nlm.nih.gov/pubmed/23001136",
+                "http://www.ncbi.nlm.nih.gov/pubmed/6823428",
+                "http://www.ncbi.nlm.nih.gov/pubmed/11694544",
+                "http://www.ncbi.nlm.nih.gov/pubmed/15858239",
+                "http://www.ncbi.nlm.nih.gov/pubmed/9359036",
+                "http://www.ncbi.nlm.nih.gov/pubmed/15617541",
+                "http://www.ncbi.nlm.nih.gov/pubmed/34422713",
+                "http://www.ncbi.nlm.nih.gov/pubmed/2309705",
+                "http://www.ncbi.nlm.nih.gov/pubmed/11106284",
+                "http://www.ncbi.nlm.nih.gov/pubmed/20027720",
+                "http://www.ncbi.nlm.nih.gov/pubmed/23001136",
+                "http://www.ncbi.nlm.nih.gov/pubmed/6823428",
+                "http://www.ncbi.nlm.nih.gov/pubmed/11694544",
+                "http://www.ncbi.nlm.nih.gov/pubmed/15858239",
+                "http://www.ncbi.nlm.nih.gov/pubmed/9359036",
+                "http://www.ncbi.nlm.nih.gov/pubmed/15617541",
+                "http://www.ncbi.nlm.nih.gov/pubmed/34422713",
+                "http://www.ncbi.nlm.nih.gov/pubmed/2309705"
+            ]
+        },
+        {
+            "id": "55046d5ff8aee20f27000007",
+            "type": "list",
+            "body": "List signaling molecules (ligands) that interact with the receptor EGFR?",
+            "documents": [
+                "http://www.ncbi.nlm.nih.gov/pubmed/7908191",
+                "http://www.ncbi.nlm.nih.gov/pubmed/27790245",
+                "http://www.ncbi.nlm.nih.gov/pubmed/35113412",
+                "http://www.ncbi.nlm.nih.gov/pubmed/25863072",
+                "http://www.ncbi.nlm.nih.gov/pubmed/19429859",
+                "http://www.ncbi.nlm.nih.gov/pubmed/30268436",
+                "http://www.ncbi.nlm.nih.gov/pubmed/16140938",
+                "http://www.ncbi.nlm.nih.gov/pubmed/32227891",
+                "http://www.ncbi.nlm.nih.gov/pubmed/24127898",
+                "http://www.ncbi.nlm.nih.gov/pubmed/14708119",
+                "http://www.ncbi.nlm.nih.gov/pubmed/7908191",
+                "http://www.ncbi.nlm.nih.gov/pubmed/27790245",
+                "http://www.ncbi.nlm.nih.gov/pubmed/35113412",
+                "http://www.ncbi.nlm.nih.gov/pubmed/25863072",
+                "http://www.ncbi.nlm.nih.gov/pubmed/19429859",
+                "http://www.ncbi.nlm.nih.gov/pubmed/30268436",
+                "http://www.ncbi.nlm.nih.gov/pubmed/16140938",
+                "http://www.ncbi.nlm.nih.gov/pubmed/32227891",
+                "http://www.ncbi.nlm.nih.gov/pubmed/24127898",
+                "http://www.ncbi.nlm.nih.gov/pubmed/14708119"
+            ]
+        },
+        {
+            "id": "54e25eaaae9738404b000017",
+            "type": "yesno",
+            "body": "Is the protein Papilin secreted?",
+            "documents": [
+                "http://www.ncbi.nlm.nih.gov/pubmed/15094122",
+                "http://www.ncbi.nlm.nih.gov/pubmed/38284126",
+                "http://www.ncbi.nlm.nih.gov/pubmed/16571634",
+                "http://www.ncbi.nlm.nih.gov/pubmed/21784067",
+                "http://www.ncbi.nlm.nih.gov/pubmed/38837578",
+                "http://www.ncbi.nlm.nih.gov/pubmed/39169693",
+                "http://www.ncbi.nlm.nih.gov/pubmed/40094323",
+                "http://www.ncbi.nlm.nih.gov/pubmed/19297413",
+                "http://www.ncbi.nlm.nih.gov/pubmed/20805556",
+                "http://www.ncbi.nlm.nih.gov/pubmed/29678203",
+                "http://www.ncbi.nlm.nih.gov/pubmed/15094122",
+                "http://www.ncbi.nlm.nih.gov/pubmed/38284126",
+                "http://www.ncbi.nlm.nih.gov/pubmed/16571634",
+                "http://www.ncbi.nlm.nih.gov/pubmed/21784067",
+                "http://www.ncbi.nlm.nih.gov/pubmed/38837578",
+                "http://www.ncbi.nlm.nih.gov/pubmed/39169693",
+                "http://www.ncbi.nlm.nih.gov/pubmed/40094323",
+                "http://www.ncbi.nlm.nih.gov/pubmed/19297413",
+                "http://www.ncbi.nlm.nih.gov/pubmed/20805556",
+                "http://www.ncbi.nlm.nih.gov/pubmed/29678203"
+            ]
+        }
+    ]
+}

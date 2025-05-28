@@ -1,2 +1,4 @@
-/venv
+/.venv311
+/.venv
+.DS_Store
 /data/word2vecTools

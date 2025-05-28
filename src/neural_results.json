@@ -1,0 +1,309 @@
+{
+  "questions": [
+    {
+      "id": "55031181e9bde69634000014",
+      "documents": [
+        "http://www.ncbi.nlm.nih.gov/pubmed/15617541",
+        "http://www.ncbi.nlm.nih.gov/pubmed/15829955",
+        "http://www.ncbi.nlm.nih.gov/pubmed/20027720"
+      ],
+      "snippets": [
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/15617541",
+          "text": "The non-Mendelian inheritance of sporadic non-syndromic Hirschsprung's disease proved to be complex; involvement of multiple loci was demonstrated in a multiplicative model.",
+          "offsetInBeginSection": 820,
+          "offsetInEndSection": 992,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.9329843521118164
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/15617541",
+          "text": "In this study, we review the identification of genes and loci involved in the non-syndromic common form and syndromic Mendelian forms of Hirschsprung's disease.",
+          "offsetInBeginSection": 554,
+          "offsetInEndSection": 713,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.9296978712081909
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/15617541",
+          "text": "The majority of the identified genes are related to Mendelian syndromic forms of Hirschsprung's disease.",
+          "offsetInBeginSection": 715,
+          "offsetInEndSection": 818,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.929275393486023
+        }
+      ]
+    },
+    {
+      "id": "55046d5ff8aee20f27000007",
+      "documents": [
+        "http://www.ncbi.nlm.nih.gov/pubmed/7908191",
+        "http://www.ncbi.nlm.nih.gov/pubmed/14708119"
+      ],
+      "snippets": [
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/7908191",
+          "text": "Transmembrane receptor tyrosine kinases that bind to peptide factors transmit essential growth and differentiation signals.",
+          "offsetInBeginSection": 0,
+          "offsetInEndSection": 122,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.9269737005233765
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/7908191",
+          "text": "The Neu differentiation factor (NDF or heregulin), however, also acts as a mitogen for epithelial, Schwann and glial cells.",
+          "offsetInBeginSection": 832,
+          "offsetInEndSection": 954,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.9228076934814453
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/7908191",
+          "text": "The neu gene (also called erbB-2 and HER-2) encodes such a receptor tyrosine kinase whose oncogenic potential is released in the developing rodent nervous system through a point mutation.",
+          "offsetInBeginSection": 300,
+          "offsetInEndSection": 486,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.916569173336029
+        }
+      ]
+    },
+    {
+      "id": "54e25eaaae9738404b000017",
+      "documents": [
+        "http://www.ncbi.nlm.nih.gov/pubmed/39990436",
+        "http://www.ncbi.nlm.nih.gov/pubmed/39989960",
+        "http://www.ncbi.nlm.nih.gov/pubmed/40094323"
+      ],
+      "snippets": [
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40094323",
+          "text": "Here, we show that the matrix glycoprotein Papilin (Ppn) is essential for maintaining the prohaemocyte population in lymph glands.",
+          "offsetInBeginSection": 412,
+          "offsetInEndSection": 541,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.9060425162315369
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40094323",
+          "text": "The matrix glycoprotein Papilin maintains the haematopoietic progenitor pool in Drosophila lymph glands.",
+          "offsetInBeginSection": 0,
+          "offsetInEndSection": 103,
+          "beginSection": "title",
+          "endSection": "title",
+          "score": 0.8873360753059387
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/39990436",
+          "text": "Remodeling of extracellular matrix collagen IV by MIG-6/papilin regulates neuronal architecture.",
+          "offsetInBeginSection": 0,
+          "offsetInEndSection": 95,
+          "beginSection": "title",
+          "endSection": "title",
+          "score": 0.8799259662628174
+        }
+      ]
+    },
+    {
+      "id": "535d292a9a4572de6f000003",
+      "documents": [
+        "http://www.ncbi.nlm.nih.gov/pubmed/40389446",
+        "http://www.ncbi.nlm.nih.gov/pubmed/40409693",
+        "http://www.ncbi.nlm.nih.gov/pubmed/40419957"
+      ],
+      "snippets": [
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40389446",
+          "text": "The dataset is highly valuable for additional research on small and long non-coding RNAs, such as regulation of RNA variants by splicing or alternative ORFs.",
+          "offsetInBeginSection": 828,
+          "offsetInEndSection": 984,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.9009790420532227
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40389446",
+          "text": "MicroRNAs (miRNAs), among other small non-coding RNAs, shape the transcriptome and control cellular functions.",
+          "offsetInBeginSection": 77,
+          "offsetInEndSection": 186,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.8907953500747681
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40419957",
+          "text": "Alternative splicing (AS) analysis revealed 8,729 distinct events, dominated by exon skipping, contributing to transcriptomic diversity.",
+          "offsetInBeginSection": 575,
+          "offsetInEndSection": 710,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.8724725246429443
+        }
+      ]
+    },
+    {
+      "id": "55262a9787ecba3764000009",
+      "documents": [
+        "http://www.ncbi.nlm.nih.gov/pubmed/40422254",
+        "http://www.ncbi.nlm.nih.gov/pubmed/40419580",
+        "http://www.ncbi.nlm.nih.gov/pubmed/40415321"
+      ],
+      "snippets": [
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40422254",
+          "text": "The influence of negative pressure consequently resulted in a decreased RANKL/OPG ratio in osteoblasts.",
+          "offsetInBeginSection": 1483,
+          "offsetInEndSection": 1585,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.8935837149620056
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40415321",
+          "text": "It was found that 7HF lowered the serum levels of cytokines, ALP, TRAP 5b, and RANKL.",
+          "offsetInBeginSection": 1820,
+          "offsetInEndSection": 1904,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.8834254741668701
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40419580",
+          "text": "Single-step non-Masquelet conventional surgery (NMCS) was also performed, and the biological characteristics of the stromal tissues induced around the ceramic granules were compared between the two procedures.",
+          "offsetInBeginSection": 627,
+          "offsetInEndSection": 835,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.8693631887435913
+        }
+      ]
+    },
+    {
+      "id": "51406e6223fec90375000009",
+      "documents": [],
+      "snippets": []
+    },
+    {
+      "id": "553fa78b1d53b76422000007",
+      "documents": [
+        "http://www.ncbi.nlm.nih.gov/pubmed/40183399",
+        "http://www.ncbi.nlm.nih.gov/pubmed/40185537",
+        "http://www.ncbi.nlm.nih.gov/pubmed/40227208"
+      ],
+      "snippets": [
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40183399",
+          "text": "Role of DNA methylation and non\u2011coding RNAs expression in pathogenesis, detection, prognosis, and therapy\u2011resistant ovarian carcinoma (Review).",
+          "offsetInBeginSection": 0,
+          "offsetInEndSection": 142,
+          "beginSection": "title",
+          "endSection": "title",
+          "score": 0.9396404027938843
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40183399",
+          "text": "The present review focused on the role of DNA methylation and non\u2011coding RNA expression in the development of ovarian carcinomas and their association with diagnosis, prognosis, and the resistance of cancer cells to radiotherapy and chemotherapy.",
+          "offsetInBeginSection": 543,
+          "offsetInEndSection": 788,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.9388539791107178
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40183399",
+          "text": "In addition, molecular characteristics, including DNA methylation and RNA transcription, are being explored as potential new biomarkers for the diagnosis and prognosis of this type of neoplasia.",
+          "offsetInBeginSection": 348,
+          "offsetInEndSection": 541,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.9329478740692139
+        }
+      ]
+    },
+    {
+      "id": "5149199dd24251bc05000040",
+      "documents": [
+        "http://www.ncbi.nlm.nih.gov/pubmed/40248578",
+        "http://www.ncbi.nlm.nih.gov/pubmed/40313945",
+        "http://www.ncbi.nlm.nih.gov/pubmed/40177063"
+      ],
+      "snippets": [
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40177063",
+          "text": "Overall, 20 patients received first acetylcholinesterase inhibitors or corticosteroids with no prior therapy during the study period.",
+          "offsetInBeginSection": 757,
+          "offsetInEndSection": 889,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.937788188457489
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40248578",
+          "text": "Almost all patients treated for AMG receive anticholinesterase and corticosteroid therapy alone or in combination with azathioprine.",
+          "offsetInBeginSection": 2185,
+          "offsetInEndSection": 2316,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.93010014295578
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40313945",
+          "text": "This study aims to evaluate the efficacy and safety of EFG in patients with very-late-onset myasthenia gravis (VLOMG).",
+          "offsetInBeginSection": 188,
+          "offsetInEndSection": 305,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.9217965006828308
+        }
+      ]
+    },
+    {
+      "id": "52bf1db603868f1b06000011",
+      "documents": [
+        "http://www.ncbi.nlm.nih.gov/pubmed/40408051",
+        "http://www.ncbi.nlm.nih.gov/pubmed/40139537",
+        "http://www.ncbi.nlm.nih.gov/pubmed/40171992"
+      ],
+      "snippets": [
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40408051",
+          "text": "Evaluation of Anti-SARS-CoV-2 IgG Responses in a Clinical Study of a Biosimilar Candidate to Denosumab Using Singlicate Analysis.",
+          "offsetInBeginSection": 0,
+          "offsetInEndSection": 128,
+          "beginSection": "title",
+          "endSection": "title",
+          "score": 0.911336362361908
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40171992",
+          "text": "Denosumab is FDA-approved for osteoporosis, but its effects on pain and function in Chinese patients with PMOP remain underexplored.",
+          "offsetInBeginSection": 227,
+          "offsetInEndSection": 358,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.9043738842010498
+        },
+        {
+          "document": "http://www.ncbi.nlm.nih.gov/pubmed/40171992",
+          "text": "Following 12\u2009months of denosumab treatment in patients with PMOP and increasing BMD, there was a significant improvement in pain and functional disability.",
+          "offsetInBeginSection": 1953,
+          "offsetInEndSection": 2107,
+          "beginSection": "abstract",
+          "endSection": "abstract",
+          "score": 0.8916074633598328
+        }
+      ]
+    },
+    {
+      "id": "5709e4b2cf1c32585100001c",
+      "documents": [],
+      "snippets": []
+    }
+  ]
+}

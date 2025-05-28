@@ -40,6 +40,9 @@ def get_embeddings(texts, model, tokenizer, max_length=512):
 
     # Convert from PyTorch tensor to numpy array
     return embeddings.cpu().numpy()
+
+
+
 def retrieve_and_rank_documents_neural(question, model, tokenizer, max_docs=50):
     """
     Retrieve documents using the PubMed API and rank them using neural embeddings.
