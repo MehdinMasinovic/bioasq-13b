@@ -1,12 +1,4 @@
-# Write shell script to run evaluation measures
-# It should have the following structure:
-# Take two filenames, the first is the ground truth file (A) and the second is the predicted file (B)
-# The script should pass these files to the eval_helpers.py script which then writes to evaluation_measures/results/mesh/A.txt and evaluation_measures/results/mesh/B.txt
-# The script should then run the following java command to map the mesh files:
-# java -Xmx10G -cp ../Evaluation-Measures/flat/BioASQEvaluation/dist//BioASQEvaluation.jar converters.MapMeshResults evaluation_measures/mesh/mapping.txt evaluation_measures/results/mesh/A.txt evaluation_measures/results/mapped/B.txt
-# And finally, it should run the following command to evaluate the results:
-# java -Xmx10G -cp ../Evaluation-Measures/flat/BioASQEvaluation/dist//BioASQEvaluation.jar evaluation.Evaluator evaluation_measures/results/mapped/A.txt evaluation_measures/results/mapped/B.txt
-# The above prints the results to the console which should be redirected to evaluation_measures/results/output/A_results.txt. 
+# This script takes two filenames and an output name as arguments, runs the python script on this and then the java script to evaluate the results.
 
 #!/bin/bash
 if [ "$#" -ne 3 ]; then
