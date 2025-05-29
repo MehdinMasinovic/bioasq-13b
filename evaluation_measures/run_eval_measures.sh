@@ -18,7 +18,8 @@ mkdir -p $MAPPED_DIR
 mkdir -p $OUTPUT_DIR
 java -Xmx10G -cp ../Evaluation-Measures/flat/BioASQEvaluation/dist//BioASQEvaluation.jar converters.MapMeshResults evaluation_measures/mesh/mapping.txt $MESH_DIR/${OUTPUT_NAME}_pred.txt $MAPPED_DIR/${OUTPUT_NAME}_pred.txt
 java -Xmx10G -cp ../Evaluation-Measures/flat/BioASQEvaluation/dist//BioASQEvaluation.jar converters.MapMeshResults evaluation_measures/mesh/mapping.txt $MESH_DIR/${OUTPUT_NAME}_gold.txt $MAPPED_DIR/${OUTPUT_NAME}_gold.txt
-java -Xmx10G -cp ../Evaluation-Measures/flat/BioASQEvaluation/dist//BioASQEvaluation.jar evaluation.Evaluator $MAPPED_DIR/${OUTPUT_NAME}_gold.txt $MAPPED_DIR/${OUTPUT_NAME}_pred.txt > $OUTPUT_DIR/${OUTPUT_NAME}_results.txt
+java -Xmx10G -cp ../Evaluation-Measures/flat/BioASQEvaluation/dist//BioASQEvaluation.jar evaluation.Evaluator $MAPPED_DIR/${OUTPUT_NAME}_gold.txt $MAPPED_DIR/${OUTPUT_NAME}_pred.txt > $OUTPUT_DIR/${OUTPUT_NAME}_flat_results.txt
+../Evaluation-Measures/hierarchical/bin/HEMKit evaluation_measures/mesh/mesh_hiearchy_int.txt $MAPPED_DIR/${OUTPUT_NAME}_gold.txt $MAPPED_DIR/${OUTPUT_NAME}_pred.txt 4 5 > $OUTPUT_DIR/${OUTPUT_NAME}_hier_results.txt
 echo "Evaluation completed. Results are saved in $OUTPUT_DIR/${OUTPUT_NAME}_results.txt"
 # End of script
 # Make sure to give execute permission to the script before running it:
