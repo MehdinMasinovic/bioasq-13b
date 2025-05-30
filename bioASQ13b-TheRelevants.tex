@@ -191,8 +191,10 @@ The other variation of the traditional model, which uses the BioBERT model to re
 \section{Discussion}
 
 \subsection{Comparative Analysis}
+The evaluation results show that the neural approach consistently outperforms the traditional IR system across both flat and hierarchical MeSH metrics, especially in precision-based measures. The main weakness of the traditional is that it tends to favor recall over precision, retrieving a larger number of documents with lower relevance scores. 
 
-The traditional and neural approaches demonstrated complementary strengths throughout our evaluation. The traditional approach offers faster execution time, transparent ranking mechanisms that are easily interpretable, effective performance for keyword-rich queries, and robust results when combined with proper query expansion. In contrast, the neural approach provides superior semantic understanding, better handling of paraphrases and synonyms, more relevant snippet extraction based on meaning rather than keyword overlap, and potential for cross-lingual retrieval applications.
+Notably, the hybrid methods (cutoff filtering and neural reranking) improved over the base traditional model, closing the gap toward the neural model. However, neither surpassed the neural model in F1 or hierarchical metrics. This suggests that deep semantic understanding from the BioBERT embeddings contributes more to retrieval quality than score-based reranking alone.
+% The traditional and neural approaches demonstrated complementary strengths throughout our evaluation. The traditional approach offers faster execution time, transparent ranking mechanisms that are easily interpretable, effective performance for keyword-rich queries, and robust results when combined with proper query expansion. In contrast, the neural approach provides superior semantic understanding, better handling of paraphrases and synonyms, more relevant snippet extraction based on meaning rather than keyword overlap, and potential for cross-lingual retrieval applications.
 
 \subsection{Challenges and Limitations}
 
@@ -204,7 +206,7 @@ Common failure modes included acronym disambiguation errors where medical abbrev
 
 \subsection{Potential Improvements}
 
-Based on our analysis, several improvements could enhance system performance. A hybrid approach combining BM25 initial retrieval with neural reranking could leverage the speed of traditional methods with the semantic understanding of neural models. Domain adaptation through fine-tuning BioBERT on BioASQ-specific data could improve performance on challenge-specific terminology. Query reformulation techniques generating multiple query variants for difficult questions could improve recall. Finally, ensemble methods combining predictions from multiple models could provide more robust results.
+Another challenge was the way that the results were evaluated. While evaluating on exact article IDs is of course unfeasible for the challenge, it is still a limitation that the evaluation is done on MeSH terms, since some articles might contribute a lot of irrelevant MeSH terms, which will lower the precision of the model. Another approach to a model could be to look at the MeSH terms of the retrieved documents and be more selective about which documents to output. 
 
 \subsection{Broader Implications}
 
@@ -212,10 +214,17 @@ The presented work contributes to the broader goal of making biomedical knowledg
 
 \section{Conclusion}
 
-We successfully implemented and evaluated three distinct approaches for biomedical question answering in the context of BioASQ Task 13b. The traditional BM25-based system with word2vec query expansion demonstrated robust performance, retrieving relevant documents for 84.7\% of test questions. The neural approach using BioBERT embeddings plus the re-ranking showed comparable coverage while excelling at semantic similarity matching.
+% We successfully implemented and evaluated three distinct approaches for biomedical question answering in the context of BioASQ Task 13b. The traditional BM25-based system with word2vec query expansion demonstrated robust performance, retrieving relevant documents for 84.7\% of test questions. The neural approach using BioBERT embeddings plus the re-ranking showed comparable coverage while excelling at semantic similarity matching.
 
-Key contributions of this work include a comprehensive implementation of both traditional and neural IR techniques tailored for biomedical text, effective integration with the BioASQ API infrastructure with robust session management, detailed comparative analysis highlighting the complementary strengths of each approach, and valuable insights into challenges specific to biomedical information retrieval.
+% Key contributions of this work include a comprehensive implementation of both traditional and neural IR techniques tailored for biomedical text, effective integration with the BioASQ API infrastructure with robust session management, detailed comparative analysis highlighting the complementary strengths of each approach, and valuable insights into challenges specific to biomedical information retrieval.
 
-Future work should focus on hybrid approaches that leverage the efficiency of traditional methods with the semantic understanding of neural models. Additionally, incorporating recent advances in large language models could further improve performance on complex biomedical questions. The systems developed provide a solid foundation for biomedical question answering and demonstrate the ongoing evolution from keyword-based to semantic search paradigms in specialized domains.
+% Future work should focus on hybrid approaches that leverage the efficiency of traditional methods with the semantic understanding of neural models. Additionally, incorporating recent advances in large language models could further improve performance on complex biomedical questions. The systems developed provide a solid foundation for biomedical question answering and demonstrate the ongoing evolution from keyword-based to semantic search paradigms in specialized domains.
+
+
+In this project, we built five approaches to biomedical document retrieval for BioASQ Task 13b Phase A. While the initial neural reranking approach had some problems, the three variants of the traditional IR model as well as the neural nlp model were run and evaluated. Our results, based on both flat and hierarchical MeSH evaluations, show that the neural model using BioBERT embeddings consistently retrieves more relevant documents than the traditional BM25-based method.
+
+While the traditional system didn't perform as well overall, small changes like adding a score cutoff or using neural reranking led to noticeable improvements. These results suggest that even without a full neural pipeline, classical methods can still be made quite competitive.
+
+By evaluating on MeSH terms — not just exact PubMed matches — we gained a more realistic sense of how useful the retrieved documents actually are. This type of evaluation highlights the importance of semantic relevance in biomedical search tasks. Going forward, systems that combine neural models with structured domain knowledge may be the most effective at handling the complexity of biomedical questions.
 
 \end{document}
