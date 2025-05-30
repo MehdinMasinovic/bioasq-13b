@@ -1,6 +1,7 @@
 import json
 from json import JSONDecodeError
 import requests
+import xml.etree.ElementTree as ET
 
 # Importing NLTK for text processing (if we don't use lemmatization or word2vec)
 import nltk
@@ -135,43 +136,72 @@ def get_session():
         print(f"Request failed: {e}")
         raise e
 
-
 def get_most_relevant_documents(keywords, page=0, documents_per_page=25):
     """
-    This function retrieves the most relevant documents from the BioASQ server based on the provided keywords.
+    This function retrieves the most relevant documents from PubMed using the E-utilities API.
 
     Args:
         keywords (str): The keywords to search for in the documents.
-        page (int): The page number for pagination. Default is 0.
-        documents_per_page (int): The number of documents to retrieve per page. Default is 10.
+        page (int): The page number for pagination. Default is 0. (Unused)
+        documents_per_page (int): The number of documents to retrieve per page. Default is 25.
 
     Returns:
         list: A list of objects containing the most relevant documents.
             Content of the objects:
-                year (string): The year of publication.
-                documentAbstract (string): Abstract of the document.
-                meshAnnotations (unclear - Null): MESH annotations of the document. (No idea what this is, usually Null)
-                pmid (string): The PubMed ID of the document. Useful in case you want to look for the entire document in PubMed.
-                        E.g. pmid = 38939119; https://pubmed.ncbi.nlm.nih.gov/38939119/
+                pmid (string): The PubMed ID of the document.
                 title (string): Title of the document.
-                sections (unclear - Null: section of the document? (No idea what this is, usually Null)
-                fulltextAvailable (Boolean): Indicates if the full text of the document is available.
-                journal (string): Journal in which the document was published?
-                meshHeading (list of strings): MESH entities of the document, related to knowledge graphs?
-
-
-
+                documentAbstract (string): Abstract of the document.
+                year (string): Year of publication (if available).
+                journal (string): Journal name (if available).
     """
-    session_url = get_session()
-    request_data = f'json={{"findPubMedCitations": ["{keywords}", {page}, {documents_per_page}]}}'
+    # Step 1: Search for PubMed IDs
+    search_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
+    search_params = {
+        "db": "pubmed",
+        "term": keywords,
+        "retmode": "json",
+        "retmax": documents_per_page
+    }
+    search_response = requests.get(search_url, params=search_params)
 
-    response = requests.post(session_url, data=request_data)
+    if search_response.status_code == 200:
+        id_list = search_response.json()["esearchresult"]["idlist"]
+        if not id_list:
+            return []
 
-    if response.status_code == 200:
-        return response.json()['result']['documents']
+        # Step 2: Fetch details for those IDs
+        fetch_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+        fetch_params = {
+            "db": "pubmed",
+            "id": ",".join(id_list),
+            "retmode": "xml"
+        }
+        fetch_response = requests.get(fetch_url, params=fetch_params)
+
+        if fetch_response.status_code == 200:
+            articles = []
+            root = ET.fromstring(fetch_response.content)
+            for article in root.findall(".//PubmedArticle"):
+                pmid = article.findtext(".//PMID")
+                title = article.findtext(".//ArticleTitle") or ""
+                abstract = " ".join([abst.text or "" for abst in article.findall(".//AbstractText")])
+                # Try to get year and journal if available
+                year = article.findtext(".//PubDate/Year") or ""
+                journal = article.findtext(".//Journal/Title") or ""
+                articles.append({
+                    "pmid": pmid,
+                    "title": title,
+                    "documentAbstract": abstract,
+                    "year": year,
+                    "journal": journal
+                })
+            return articles
+        else:
+            print(f"Error: Received status code {fetch_response.status_code} from efetch")
+            return []
     else:
-        print(f"Error: Received status code {response.status_code}")
-        return None
+        print(f"Error: Received status code {search_response.status_code} from esearch")
+        return []
 
 def extract_keywords(text):
     tokens = word_tokenize(text.lower())
