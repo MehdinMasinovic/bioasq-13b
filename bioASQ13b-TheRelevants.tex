@@ -11,15 +11,17 @@
 \usepackage{xcolor}
 
 \title{BioASQ Task 13b: A Comparative Study of Traditional and Neural Approaches for Biomedical Question Answering}
-\author{{Bernal Nicolas\\
-\text{12347489}
+\author{
+Bernal Nicolas\\12347489
 \and
-Masinovic Mehdin\\
-\text{11713301}
+Masinovic Mehdin\\11713301
 \and
-Mohammadi Fardokhtsadat\\
-\text{01655989}
-}}
+Mohammadi Fardokhtsadat\\01655989
+\and
+Jonathan Højlev\\12446602
+\and
+MD Khasrur Rahman\\ 12306556
+}
 \date{\today}
 
 \begin{document}
@@ -38,8 +40,8 @@ The following report presents a comprehensive study on biomedical question-answe
   \item Traditional IR model: Bernal Nicolas
   \item Neural model: Mehdin Masinovic
   \item Neural re-ranking model: Fardokhtsadat Mohammadi
-  \item Post-evaluation using Pubmed API directly:
-  \item Visualization and summarization of retrieval quality:
+  \item Using Pubmed API directly: MD Khasrur Rahman
+  \item Post-evaluation, model variations, and Visualization of results: Jonathan Højlev
 \end{itemize}
 
 \subsection{Background}
@@ -64,6 +66,12 @@ The BioASQ Task 13b dataset consists of training data containing 5,389 questions
 
 Each training question includes the question body and type, gold standard documents represented as PubMed URLs, relevant snippets with offset information, ideal answers and exact answers, and related concepts and RDF triples. This rich annotation enables comprehensive training and evaluation of question-response systems.
 
+\subsection{MeSH Terms and PubMed Indexing}
+
+For evaluating the retrieval performance, the retrieved documents are not compared by their exact PubMed IDs, but rather by their MeSH (Medical Subject Headings) terms. 
+All PubMed articles are annotated with MeSH terms, which capture the key topics of each publication. These terms enable more accurate and structured retrieval by linking synonyms and related concepts through a hierarchical structure. In this way, it is not the exact retrived documents that are important, but rather the MeSH terms that are associated with them. This is used in the post-evaluation of the models. When we are evaluating the models, we use the a PubMed API to retrieve the MeSH terms of the retrieved documents, and then compare them with the MeSH terms of the gold standard documents.
+
+
 \subsection{System Architecture}
 
 \subsubsection{Traditional Approach}
@@ -86,6 +94,14 @@ Our multistage retrieval process begins with initial candidate retrieval of 50 d
 
 "pritamdeka/BioBERT-Reranker" was chosen as the neural reranker, which is used to rerank models after the initial first-stage retrieval using "dmis-lab/biobert-base-cased-v1.1". Unfortunately, the BioASQ API returned server-side errors when running this model, which is why we were unable to submit any result data for this model (see \href{https://tuwel.tuwien.ac.at/mod/forum/discuss.php?d=493679}{this Tuwel post}). 
 
+\subsubsection{Post-Evaluation improvements}
+After analyzing the results of the models (see section \ref{sec:results}), the traditional model was improved in two different ways. 
+
+After seeing a good recall but low precision, we concluded that the model was retrieving too many irrelevant documents, and made a simple change: instead of outputting the top 10 documents, we output the top 7 instead. The results of this change can be seen in the evaluation results section.
+
+The second change was to use the BioBERT model to rerank the documents retrieved by the traditional model. This was done by using the same BioBERT model as mentioned above, but at the time of post-evaluation, we got it to work. The reranking was done by computing the cosine similarity between the question and the document embeddings, and then sorting the documents based on this similarity score. The top 10 documents were then selected as the final output.
+
+
 \subsection{Implementation Details}
 
 \subsubsection{Technical Stack}
@@ -100,7 +116,7 @@ The word2vec expansion process iterates through each keyword in the query, findi
 
 Custom session management for the BioASQ API includes automatic session renewal every 10 minutes to prevent timeout errors. We implement retry logic for failed requests and batch processing to respect rate limits. This robust integration ensures reliable access to PubMed document collection throughout the retrieval process.
 
-\section{Results}
+\section{Results}\label{sec:results}
 
 \subsection{Document Retrieval Performance}
 
@@ -125,6 +141,52 @@ Questions resulting in no retrieved documents typically involved highly specific
 \subsection{Snippet Extraction Quality}
 
 Qualitative analysis of extracted snippets revealed distinct patterns between approaches. The traditional approach demonstrated high precision for keyword-rich snippets, while the neural approach showed better contextual relevance and semantic coherence. Both systems faced challenges with accurate snippet boundary detection, occasionally truncating important contextual information.
+
+\subsection{Evaluation Metrics}
+Using the evaluation framework \href{https://github.com/BioASQ/Evaluation-Measures}{this library} on GitHub provided on Tuwel, we could also evaluate the models on the MeSH terms of the retrieved documents instead of the PubMed IDs. There were both "flat" and "hierarchical" evaluation metrics, which are used to evaluate the models on the MeSH terms. The flat evaluation is based on the exact match of the MeSH terms, while the hierarchical evaluation considers the hierarchical structure of the MeSH terms.
+
+The flat evaluation includes a variety of precision, recall, and F1-based metrics:
+\begin{itemize}
+  \item \textbf{Accuracy}: Proportion of exactly correct MeSH sets.
+  \item \textbf{EbP, EbR, EbF}: Example-based precision, recall, and F1, computed per question and averaged.
+  \item \textbf{MaP, MaR, MaF}: Macro-averaged metrics, computed over all unique MeSH terms.
+  \item \textbf{MiP, MiR, MiF}: Micro-averaged metrics, computed over all predictions and gold annotations.
+\end{itemize}
+
+The Hierarchical evaluation uses metrics that consider the semantic distance between MeSH terms in the MeSH tree:
+\begin{itemize}
+  \item \textbf{hP, hR, hF}: Hierarchical precision, recall, and F1 based on ancestor overlap in the MeSH hierarchy.
+  \item \textbf{LCA-P, LCA-R, LCA-F}: Metrics based on the lowest common ancestor (LCA) of predicted and gold MeSH terms.
+\end{itemize}
+
+Out of all of these metrics, the f-scores (EbF, MaF, MiF, hF, and LCA-F) will be considered the most important, as they provide a balanced measure of precision and recall.
+
+\subsection{Evaluation Results}
+An important detail to consider in the way that we ran the evaluator is that after we used the BioASQ API to retrieve the MeSH terms of the retrieved documents, we filtered out the questions where either the gold standard or the retrieved documents had no MeSH terms. This was done to avoid errors in the evaluation, as the evaluator expects that both the gold standard and the retrieved documents have MeSH terms. As such, even though the test dataset has 85 questions, the evaluation, depending on the model, had around 70 questions in common with the gold standard.
+
+First we will compare the traditional and the neural model, and then see what difference the two variations of the traditional model made. See figure \ref{fig:flat_eval} for this comparison. 
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{evaluation_measures/results/plots/trad_vs_neu_flat.png}
+  \includegraphics[width=0.8\textwidth]{evaluation_measures/results/plots/trad_vs_neu_hier.pdf}
+  \caption{Flat Evaluation Metrics for Traditional vs Neural Approaches}
+\label{fig:flat_eval}
+\end{figure}
+
+From these first comparisons, it is clear that the neural model outperforms the traditional model in all metrics, except recall, where the traditional model gets a score of over 0.5 on EbF, the example based recall, and 0.689 on hR, the hierarchical recall. This result is what inspired us to try the two variations of the traditional model, which are shown in figure \ref{fig:comparison_f_scores}.
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=.95\textwidth]{evaluation_measures/results/plots/comparison_f_scores.pdf}
+  \caption{Comparison of F-scores for the two baseline and two variation models}
+\label{fig:comparison_f_scores}
+\end{figure}
+
+By simply setting another threshold on the number of retrieved documents, we were able to increase the precision from 0.179 to 0.244, while the recall dropped from 0.509 to 0.411. This gives the model a better balance, increasing all of the F-scores, except for the MaF (macro-averaged F-score), which makes sense, as the macro-averaged F-score computed over all questions, and since the number of retrieved documents is reduced, the model will not be able to retrieve as many relevant documents for some questions, which will lower the macro-averaged F-score.
+
+The other variation of the traditional model, which uses the BioBERT model to rerank the documents retrieved by the traditional model, is much closer to the neural model on all f-scores and is the best variation of the traditional model, even though it's not as good as the neural model. 
+
 
 \section{Discussion}
 
